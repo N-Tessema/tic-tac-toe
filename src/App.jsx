@@ -33,6 +33,7 @@ export default function App() {
 
 
   function handleClick(i) {
+    if (squares[i] || winner) return;
     const nextSquares = squares.slice();
     nextSquares[i] = xIsNext ? "X" : "O";
     setSquares(nextSquares);
