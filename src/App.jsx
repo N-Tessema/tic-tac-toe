@@ -9,10 +9,26 @@ function Square({ value, onSquareClick }) {
     </button>
   );
 }
+function calculateWinner(squares) {
+  const lines = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // row wins
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], //  column wins
+    [0, 4, 8], [2, 4, 6],           // and diagonal wins
+  ];
+  for (const [a, b, c] of lines) {
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+  }
+  return null;
+}
+
 
 export default function App() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);   // ← add this new line here
+  const winner = calculateWinner(squares);
+
 
 
 
@@ -26,6 +42,9 @@ export default function App() {
 
   return (
     <div className="board">
+      <div className="status">
+        {winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? "X" : "O"}`}
+      </div>
       <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
         <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
