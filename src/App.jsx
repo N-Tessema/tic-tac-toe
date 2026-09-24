@@ -54,6 +54,7 @@ export default function App() {
 
   return (
     <div className="board">
+      <h1 style={{ color: "white", fontSize: "48px", margin: "10px" }}>🐻 Tic-Tac-Toe</h1>
       <div className="status">{status}</div>
       <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} isWinning={winningLine.includes(0)} />
